@@ -1,0 +1,51 @@
+const fs = require('fs');
+
+// Read the contents of the file
+let data = "asghar@gmail.com,ali, memon@gmail.com,rohan123@gmail.com,sabir@ ,ali@gmail.com,123,xyz,2gmail.com"
+
+let data1="https://www.google.com/,https://www.Yahoo.com/,https://www.Instagram.com/,https://www.Twitter.com/,ww.google"
+fs.writeFileSync('email.txt', data, (err) => {
+  console.log('file write successfully');
+})
+
+fs.writeFileSync('url.txt', data1, (err) => {
+  console.log('file write `successfully');
+})
+
+fs.readFile('email.txt', 'utf8', (error, data) => {
+  if (error) {
+    console.error('Error: Could not read the file.');
+    return;
+  }
+  //Error
+  // fs.readFile('url.txt', 'utf8', (error, data1) => {
+  // if (error) {
+  //   console.error('Error: Could not read the file.');
+  //   return;
+  // }
+
+  // Define the email pattern
+  const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+const urlPattern = /https?:\/\/[^\s/$.?#].[^\s]*/g;
+
+  const emails = data.match(emailPattern);
+ const urls = data1.match(urlPattern);
+  console.log('List of URLs:');
+  if (urls) {
+    urls.forEach((url) => {
+      console.log(url);
+    });
+  } else {
+    console.log('No URLs found.');
+  }
+
+  console.log('List of email addresses:');
+  if (emails) {
+    emails.forEach((email) => {
+      console.log(email);
+    });
+  } else {
+    console.log('No email addresses found.');
+  }
+ 
+});
